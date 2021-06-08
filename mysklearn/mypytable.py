@@ -1,8 +1,8 @@
 ##############################################
-# Programmer: Carter Mooring
+# Programmer: Carter Mooring & Armando Valdez
 # Class: CPCS 322-02, Spring 2021
-# Programming Assignment #2
-# 2/11/21
+# Spotify Api Project
+# 4/18/21
 # 
 # 
 # Description: This program opens and interprets a .csv file and stores its contents in a table.

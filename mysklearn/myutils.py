@@ -61,7 +61,9 @@ def all_same_class(instances):
 
 def majority_vote(partition):
     class_count = {}
+    print("2", partition)
     for row in partition:
+        print("1", row)
         if row[-1] not in class_count:
             class_count[row[-1]] = 0
         class_count[row[-1]] += 1
@@ -119,6 +121,14 @@ def select_attribute(instances, available_att):
 
 
 def tdidt(current_instances, available_attributes, attribute_domains, header):
+    print(current_instances)
+    print()
+    print(available_attributes)
+    print()
+    print( attribute_domains)
+    print()
+    print( header)
+    print()
     split_attribute = select_attribute(current_instances, available_attributes)
     available_attributes.remove(split_attribute) # cannot split on same attr twice in a branch
     tree = ['Attribute', split_attribute]
@@ -132,14 +142,17 @@ def tdidt(current_instances, available_attributes, attribute_domains, header):
         # TODO: appending leaf nodes and subtrees appropriately to value_subtree
         #    CASE 1: all class labels of the partition are the same => make a leaf node
         if len(partition) > 0 and all_same_class(partition): # all same class checks if all the other values equal the first one
+            print("0.1")
             subtree = ['Leaf', partition[0][-1], len(partition), len(current_instances)]
             value_subtree.append(subtree)
         #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
         elif len(partition) > 0 and len(available_attributes) == 0:
+            print("0.2")
             subtree = ['Leaf', majority_vote(partition), len(partition), len(current_instances)]
             value_subtree.append(subtree)
         #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
         elif len(partition) == 0:
+            print("0.3")
             return ['Leaf', majority_vote(prev), len(partition), len(current_instances)]
         else:
             subtree = tdidt(partition, available_attributes.copy(), attribute_domains.copy(), header.copy())
